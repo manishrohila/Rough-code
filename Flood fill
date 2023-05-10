@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool isvalid(int i , int j ,int n ,int m , vector<vector<int>> image,int oldcolor)
+    {
+        if(i<m and j<n and i>=0 and j>=0  and image[i][j]==oldcolor)
+        {
+            return true;
+        }
+        return false;
+    }
+    void floodfillRec(int i , int j ,int n ,int m ,  vector<vector<int>>& image,int color,int oldcolor)
+    {
+        image[i][j]=color;
+        if(isvalid(i+1,j,n,m,image,oldcolor))
+        {
+            floodfillRec(i+1,j,n,m,image,color,oldcolor);
+        }
+        if(isvalid(i,j+1,n,m,image,oldcolor))
+        {
+            floodfillRec(i,j+1,n,m,image,color,oldcolor);
+        }
+        if(isvalid(i-1,j,n,m,image,oldcolor))
+        {
+            floodfillRec(i-1,j,n,m,image,color,oldcolor);
+        }
+        if(isvalid(i,j-1,n,m,image,oldcolor))
+        {
+            floodfillRec(i,j-1,n,m,image,color,oldcolor);
+        }
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int m = image.size();
+        int n = image[0].size();
+       
+        int oldcolor = image[sr][sc];
+  
+        
+        floodfillRec(sr,sc,n,m,image,color,oldcolor);
+            
+        
+        return image;
+    }
+
+};
