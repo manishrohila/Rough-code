@@ -1,0 +1,38 @@
+class FrequencyTracker {
+public:
+    unordered_map<int,int> m;
+    FrequencyTracker() {
+    }
+    
+    void add(int number) {
+        m[number]++;
+    }
+    
+    void deleteOne(int number) {
+        if(m.find(number)!=m.end())
+        {
+            m.erase(number);
+        }
+        
+    }
+    
+    bool hasFrequency(int frequency) {
+        for(auto i : m)
+        {
+            if(i.second==frequency)
+            {
+                return true;
+            }
+            
+        }
+        return false;
+    }
+};
+
+/**
+ * Your FrequencyTracker object will be instantiated and called as such:
+ * FrequencyTracker* obj = new FrequencyTracker();
+ * obj->add(number);
+ * obj->deleteOne(number);
+ * bool param_3 = obj->hasFrequency(frequency);
+ */
