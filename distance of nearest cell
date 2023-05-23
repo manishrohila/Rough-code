@@ -1,0 +1,48 @@
+class Solution 
+{
+    public:
+    //Function to find distance of nearest 1 in the grid for each cell.
+    int dir[4][2]={{1,0},{-1,0},{0,1},{0,-1}};
+    void bfs(vector<vector<int>> &grid ,int vis[4][2],vector<vector<int>>& ans,int sr , int sc,int n ,int m)
+    {
+        vis[sr][sc]=1;
+        queue<pair<pair<int,int>,int>> q;
+        q.push({{sr,sc},0});
+    
+        while(!q.empty())
+        {
+            int r = q.front().first.first;
+            int c = q.front().first.second;
+            int s = q.front().second;
+            for(int i =0;i<4;i++)
+            {
+                int nrow=r+dir[i][1];
+                int ncol=c+dir[i][1];
+                if(nrow>=0 and ncol>=0 and nrow<n and nrow<m and vis[nrow][ncol]==0)
+                {
+                    vis[nrow][ncol]=1;
+                    q.push({{nrow,ncol},s+1});
+                }
+            }
+        }
+    }
+	vector<vector<int>>nearest(vector<vector<int>>grid)
+	{
+	    // Code here
+	    int n = grid.size();
+	    int m= grid[0].size();
+	    int vis[n][m]={0};
+	    vector<vector<int>> ans(n,vector<int>(m,0));
+	    for(int i = 0;i<n;i++)
+	    {
+	        for(int j = 0;j<m;j++)
+	        {
+	            if(grid[i][j])
+	            {
+	                bfs(grid,vis,ans,i,j,n,m);
+	            }
+	        }
+	    }
+	    return ans;
+	}
+};
